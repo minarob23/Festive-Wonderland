@@ -26,10 +26,31 @@ export default function Home() {
     };
     window.addEventListener("mousemove", handleMouseMove);
 
+    // Show welcome toast with music prompt
+    const welcomeTimer = setTimeout(() => {
+      toast({
+        title: "🎵 Welcome to Festive Wonderland!",
+        description: "Click the music button to start the festive atmosphere 🎄",
+        duration: 5000,
+      });
+    }, 1000);
+
     // Auto-play music on first interaction
     const startAudio = () => {
       if (audioRef.current && !isPlaying) {
-        audioRef.current.play().then(() => setIsPlaying(true)).catch(() => { });
+        audioRef.current.play()
+          .then(() => {
+            setIsPlaying(true);
+            toast({
+              title: "🎵 Music Started!",
+              description: "Enjoy the festive melodies",
+              duration: 2000,
+            });
+          })
+          .catch(() => {
+            // Browser blocked autoplay, user needs to click the music button
+            console.log("Autoplay blocked - user interaction required");
+          });
         window.removeEventListener("click", startAudio);
       }
     };
@@ -38,8 +59,9 @@ export default function Home() {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("click", startAudio);
+      clearTimeout(welcomeTimer);
     };
-  }, [mouseX, mouseY, isPlaying]);
+  }, [mouseX, mouseY, isPlaying, toast]);
 
   const toggleMusic = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -122,7 +144,7 @@ export default function Home() {
                   onClick={toggleMusic}
                   className="p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all hover:scale-110"
                 >
-                  {isPlaying ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6 animate-pulse" />}
+                  {isPlaying ? <Volume2 className="w-6 h-6" /> : <VolumeX className="w-6 h-6 animate-pulse" />}
                 </button>
               </motion.div>
             </motion.div>
