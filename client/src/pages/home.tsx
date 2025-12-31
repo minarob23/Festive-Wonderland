@@ -25,21 +25,11 @@ export default function Home() {
       mouseY.set(e.clientY);
     };
     window.addEventListener("mousemove", handleMouseMove);
-    
-    // Auto-play music on first interaction
-    const startAudio = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-        window.removeEventListener("click", startAudio);
-      }
-    };
-    window.addEventListener("click", startAudio);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("click", startAudio);
     };
-  }, [mouseX, mouseY, isPlaying]);
+  }, [mouseX, mouseY]);
 
   const toggleMusic = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -56,18 +46,18 @@ export default function Home() {
   return (
     <div className="min-h-screen relative overflow-hidden bg-background text-foreground font-sans">
       <audio ref={audioRef} src={customMusic} loop />
-      
+
       {/* Interactive Cursor Glow */}
-      <motion.div 
+      <motion.div
         className="pointer-events-none fixed inset-0 z-50 mix-blend-screen opacity-20"
         style={{
           background: `radial-gradient(400px circle at ${springX}px ${springY}px, rgba(255,255,255,0.4), transparent 80%)`
         }}
       />
 
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-40 mix-blend-overlay scale-110"
-        style={{ 
+        style={{
           backgroundImage: `url(${heroBg})`,
           transform: `translate(${springX.get() * -0.02}px, ${springY.get() * -0.02}px)`
         }}
@@ -79,7 +69,7 @@ export default function Home() {
       <main className="relative z-10 container mx-auto px-4 min-h-screen flex flex-col items-center justify-center">
         <AnimatePresence mode="wait">
           {!showNewYear ? (
-            <motion.div 
+            <motion.div
               key="christmas"
               className="flex flex-col items-center w-full"
               initial={{ opacity: 0 }}
@@ -87,7 +77,7 @@ export default function Home() {
               exit={{ opacity: 0, scale: 0.9 }}
             >
               <div className="text-center mb-16 relative z-20">
-                <motion.h1 
+                <motion.h1
                   className="text-6xl md:text-8xl lg:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-400 to-accent drop-shadow-2xl cursor-default pb-12"
                   whileHover={{ scale: 1.05, filter: "brightness(1.2)", rotate: [0, 1, -1, 0] }}
                   initial={{ y: 50, opacity: 0 }}
@@ -95,7 +85,7 @@ export default function Home() {
                 >
                   Merry Christmas
                 </motion.h1>
-                <motion.p 
+                <motion.p
                   className="text-xl md:text-2xl mt-4 font-display text-muted-foreground italic"
                   whileHover={{ color: "hsl(var(--accent))", scale: 1.05, y: -5 }}
                 >
@@ -109,7 +99,7 @@ export default function Home() {
               </div>
 
               <motion.div className="mt-16 flex flex-wrap justify-center gap-6">
-                <button 
+                <button
                   onClick={() => setShowNewYear(true)}
                   className="group relative px-10 py-5 bg-gradient-to-r from-primary to-red-600 text-white font-bold rounded-full shadow-2xl hover:scale-110 transition-transform active:scale-95"
                 >
@@ -117,8 +107,8 @@ export default function Home() {
                     <Stars className="w-7 h-7 group-hover:rotate-45 transition-transform duration-500" /> Reveal 2026
                   </span>
                 </button>
-                
-                <button 
+
+                <button
                   onClick={toggleMusic}
                   className="p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all hover:scale-110"
                 >
@@ -127,7 +117,7 @@ export default function Home() {
               </motion.div>
             </motion.div>
           ) : (
-            <motion.div 
+            <motion.div
               key="newyear"
               className="flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 100 }}
@@ -139,7 +129,7 @@ export default function Home() {
               <h2 className="text-9xl md:text-[15rem] font-black text-white mt-4 drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]">
                 2026
               </h2>
-              <button 
+              <button
                 onClick={() => setShowNewYear(false)}
                 className="mt-16 flex items-center gap-3 px-8 py-4 bg-green-700 hover:bg-green-600 text-white rounded-full transition-all hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(21,128,61,0.5)]"
               >
