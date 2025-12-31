@@ -5,93 +5,95 @@ export function ChristmasTree() {
     <div className="relative w-64 h-80 md:w-80 md:h-96" data-testid="christmas-tree">
       <motion.svg
         viewBox="0 0 100 120"
-        className="w-full h-full drop-shadow-2xl"
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
-        transition={{
-          repeat: Infinity,
-          repeatType: "reverse",
-          duration: 2,
-          ease: "easeInOut",
-        }}
+        className="w-full h-full drop-shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
       >
-        {/* Trunk */}
-        <rect x="42" y="100" width="16" height="20" fill="#4a2c2a" rx="2" />
+        {/* Modern Geometric Tree */}
+        <defs>
+          <linearGradient id="treeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "hsl(var(--secondary))", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#064e3b", stopOpacity: 1 }} />
+          </linearGradient>
+        </defs>
 
-        {/* Tree Layers */}
+        {/* Main Body */}
         <motion.path
-          d="M20,100 L50,60 L80,100 Z"
-          fill="hsl(var(--secondary))"
-          stroke="hsl(var(--secondary))"
-          strokeWidth="2"
-          strokeLinejoin="round"
-        />
-        <motion.path
-          d="M25,75 L50,40 L75,75 Z"
-          fill="hsl(var(--secondary))"
-          stroke="hsl(var(--secondary))"
-          strokeWidth="2"
-          strokeLinejoin="round"
-        />
-        <motion.path
-          d="M30,50 L50,20 L70,50 Z"
-          fill="hsl(var(--secondary))"
-          stroke="hsl(var(--secondary))"
-          strokeWidth="2"
-          strokeLinejoin="round"
+          d="M50,10 L90,100 L10,100 Z"
+          fill="url(#treeGrad)"
+          animate={{
+            d: [
+              "M50,10 L90,100 L10,100 Z",
+              "M50,12 L88,98 L12,98 Z",
+              "M50,10 L90,100 L10,100 Z"
+            ]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Star */}
+        {/* Spiral Ribbon */}
         <motion.path
-          d="M50,10 L53,18 L62,18 L55,24 L57,32 L50,27 L43,32 L45,24 L38,18 L47,18 Z"
+          d="M30,80 Q50,70 70,80"
+          fill="none"
+          stroke="hsl(var(--accent))"
+          strokeWidth="2"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, delay: 1 }}
+        />
+        <motion.path
+          d="M35,60 Q50,50 65,60"
+          fill="none"
+          stroke="hsl(var(--accent))"
+          strokeWidth="2"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, delay: 1.2 }}
+        />
+        <motion.path
+          d="M40,40 Q50,30 60,40"
+          fill="none"
+          stroke="hsl(var(--accent))"
+          strokeWidth="2"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, delay: 1.4 }}
+        />
+
+        {/* Modern Topper */}
+        <motion.circle
+          cx="50"
+          cy="10"
+          r="6"
           fill="hsl(var(--accent))"
           animate={{
-            filter: ["brightness(1)", "brightness(1.5)", "brightness(1)"],
-            scale: [1, 1.2, 1],
+            scale: [1, 1.3, 1],
+            filter: ["blur(0px)", "blur(2px)", "blur(0px)"]
           }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          transition={{ duration: 2, repeat: Infinity }}
         />
 
-        {/* Lights */}
-        <TreeLight cx="35" cy="90" color="red" delay={0} />
-        <TreeLight cx="65" cy="90" color="gold" delay={0.5} />
-        <TreeLight cx="50" cy="80" color="blue" delay={1} />
-        <TreeLight cx="40" cy="65" color="gold" delay={0.2} />
-        <TreeLight cx="60" cy="65" color="red" delay={0.7} />
-        <TreeLight cx="50" cy="55" color="blue" delay={1.2} />
-        <TreeLight cx="45" cy="40" color="red" delay={0.4} />
-        <TreeLight cx="55" cy="40" color="gold" delay={0.9} />
+        {/* Random Ornaments */}
+        {[
+          { x: 40, y: 90 }, { x: 60, y: 90 },
+          { x: 50, y: 75 }, { x: 30, y: 95 },
+          { x: 70, y: 95 }, { x: 55, y: 45 }
+        ].map((pos, i) => (
+          <motion.circle
+            key={i}
+            cx={pos.x}
+            cy={pos.y}
+            r="2.5"
+            fill={i % 2 === 0 ? "hsl(var(--primary))" : "#ffffff"}
+            animate={{ opacity: [0.3, 1, 0.3] }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+          />
+        ))}
       </motion.svg>
     </div>
-  );
-}
-
-function TreeLight({ cx, cy, color, delay }: { cx: string; cy: string; color: string; delay: number }) {
-  const colors = {
-    red: "hsl(var(--primary))",
-    gold: "hsl(var(--accent))",
-    blue: "#3b82f6",
-  };
-
-  return (
-    <motion.circle
-      cx={cx}
-      cy={cy}
-      r="3"
-      fill={colors[color as keyof typeof colors]}
-      animate={{
-        opacity: [0.4, 1, 0.4],
-      }}
-      transition={{
-        duration: 1.5,
-        repeat: Infinity,
-        delay: delay,
-        ease: "easeInOut",
-      }}
-    />
   );
 }
