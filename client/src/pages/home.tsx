@@ -86,9 +86,9 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
             >
-              <div className="text-center mb-12">
+              <div className="text-center mb-16 relative z-20">
                 <motion.h1 
-                  className="text-6xl md:text-8xl lg:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-400 to-accent drop-shadow-2xl cursor-default"
+                  className="text-6xl md:text-8xl lg:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-400 to-accent drop-shadow-2xl cursor-default pb-12"
                   whileHover={{ scale: 1.05, filter: "brightness(1.2)", rotate: [0, 1, -1, 0] }}
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
