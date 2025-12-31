@@ -26,10 +26,20 @@ export default function Home() {
     };
     window.addEventListener("mousemove", handleMouseMove);
 
+    // Auto-play music on first interaction
+    const startAudio = () => {
+      if (audioRef.current && !isPlaying) {
+        audioRef.current.play().then(() => setIsPlaying(true)).catch(() => { });
+        window.removeEventListener("click", startAudio);
+      }
+    };
+    window.addEventListener("click", startAudio);
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", startAudio);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isPlaying]);
 
   const toggleMusic = (e: React.MouseEvent) => {
     e.stopPropagation();

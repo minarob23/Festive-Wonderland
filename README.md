@@ -3,11 +3,35 @@
 Festive Wonderland is a vibrant, interactive holiday-themed web app featuring animated Christmas trees, Santa, snowfall, and festive UI components. Built with React and Vite, it offers a joyful user experience with modern design, dynamic effects, and customizable seasonal elements.
 
 ## Features
-- Animated Christmas tree, Santa, and snowfall
-- Modern, responsive UI with reusable components
-- Built using React, TypeScript, and Vite
-- Customizable festive elements
-- Easy to extend and integrate
+
+### 🎄 Visual & Interactive Elements
+- **Animated Christmas tree** with twinkling lights and ornaments
+- **Santa Claus animation** with smooth movements
+- **Dynamic snowfall effect** across the entire page
+- **Interactive cursor glow** that follows mouse movement
+- **Parallax background** with festive winter landscape
+- **Smooth transitions** between Christmas and New Year 2026 views
+
+### 🎵 Audio Experience
+- **Festive background music** (auto-plays on first user interaction)
+- **Music toggle control** with mute/unmute button
+- **Looping audio** for continuous holiday atmosphere
+
+### 🎨 Design & UX
+- **Modern, responsive UI** with glassmorphism effects
+- **Gradient text effects** with vibrant holiday colors
+- **Framer Motion animations** for smooth interactions
+- **Custom favicon** with festive Christmas theme
+- **Mobile-friendly** design that works on all devices
+
+### 🛠️ Technical Features
+- Built with **React 19** and **TypeScript**
+- **Vite** for fast development and optimized builds
+- **Tailwind CSS** for modern styling
+- **Framer Motion** for advanced animations
+- **Full-stack architecture** with Express backend
+- **Netlify-ready** deployment configuration
+
 
 ## Getting Started
 
