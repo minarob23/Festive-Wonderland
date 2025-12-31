@@ -29,20 +29,59 @@ Festive Wonderland is a vibrant, interactive holiday-themed web app featuring an
    ```
 
 ### Running the App
-Start the development server:
+
+This is a full-stack application with both frontend and backend components.
+
+**Development Mode:**
 ```bash
-npm run dev
-# or
-yarn dev
+# Start both frontend and backend
+npm run dev:client  # Frontend on http://localhost:5000
+npm run dev         # Backend server
 ```
 
-Open your browser and visit `http://localhost:5173` to view the app.
+**Production Build:**
+```bash
+npm run build
+npm start
+```
 
 ## Project Structure
 - `client/` - Frontend source code (React, components, pages)
 - `server/` - Backend server code (API, routes, static files)
 - `shared/` - Shared schemas and types
 - `attached_assets/` - Generated and static assets
+
+## Deployment
+
+### Netlify (Frontend)
+
+The project includes Netlify configuration for deploying the frontend:
+
+1. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Deploy to Netlify"
+   git push
+   ```
+
+2. **Connect to Netlify:**
+   - Go to [Netlify](https://netlify.com)
+   - Import your repository
+   - Netlify will automatically detect the `netlify.toml` configuration
+
+3. **Configuration:**
+   - Build command: `npm run build`
+   - Publish directory: `dist/public`
+   - The `netlify.toml` and `client/public/_redirects` files handle SPA routing
+
+### Backend Deployment
+
+The backend server needs to be deployed separately to a service like:
+- **Render** - [render.com](https://render.com)
+- **Railway** - [railway.app](https://railway.app)
+- **Heroku** - [heroku.com](https://heroku.com)
+
+After deploying the backend, update your frontend API calls to point to the backend URL.
 
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
