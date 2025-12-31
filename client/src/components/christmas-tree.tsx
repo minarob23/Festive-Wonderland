@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import treeImg from "@assets/image_1767201810490.png";
+import treeImg from "@assets/image_1767201950865.png";
 
 export function ChristmasTree() {
   return (
@@ -12,21 +12,15 @@ export function ChristmasTree() {
       <motion.img
         src={treeImg}
         alt="Beautiful Christmas Tree"
-        className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+        className="w-full h-full object-contain"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: 1, 
           scale: 1,
-          filter: [
-            "drop-shadow(0 0 10px rgba(255,255,255,0.2))",
-            "drop-shadow(0 0 25px rgba(255,215,0,0.4))",
-            "drop-shadow(0 0 10px rgba(255,255,255,0.2))"
-          ]
         }}
         transition={{
           opacity: { duration: 1 },
           scale: { duration: 1 },
-          filter: { duration: 3, repeat: Infinity, ease: "easeInOut" }
         }}
       />
     </motion.div>
